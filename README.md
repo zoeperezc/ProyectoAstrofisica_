@@ -2,7 +2,8 @@
 IA destinada al aprendizaje y reconocimiento de cuerpos celestes
 
 ## Integrantes
-- Zoe Pérez Colman: desarrolladora de Front y Back end
+- Zoe Pérez Colman: desarrolladora de Front
+- Paloma Monzon Borioli: desarrolladora de Back end
 - Abril da Rocha Yebra: desarrolladora de IA
 - Brenda Sofia Oriolo: diseñadora
 
