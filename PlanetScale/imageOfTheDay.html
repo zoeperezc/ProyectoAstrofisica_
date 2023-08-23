@@ -3,15 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href = "style2.css" rel = "stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Astronomy Picture of the Day</title>
 </head>
 <body>
-    <h1>Astronomy Picture of the Day</h1>
-    <div id="apodContainer">
-        <img id="apodImage" src="" alt="Astronomy Picture of the Day">
-        <p id="apodTitle"></p>
-        <p id="apodExplanation"></p>
-    </div>
-    <script src="imageOfTheDayApi.js"></script>
+
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class='bx bxl-c-plus-plus icon'></i>
+            <div class="logo_name">Stargazing</div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+        <ul class="nav-list">
+          <li>
+              <i class='bx bx-search' ></i>
+             <input type="text" placeholder="Search...">
+             <span class="tooltip">Search</span>
+          </li>
+          <li>
+            <a href="#">
+                <i class='bx bx-home-alt'></i>
+              <span class="links_name">Home</span>
+            </a>
+             <span class="tooltip">Home</span>
+          </li>
+          <li>
+           <a href="#">
+            <i class='bx bx-history'></i>
+             <span class="links_name">History</span>
+           </a>
+           <span class="tooltip">History</span>
+         </li>
+         <li>
+           <a href="#">
+            <i class='bx bx-image-alt'></i>
+             <span class="links_name">Image</span>
+           </a>
+           <span class="tooltip">Image</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-news' ></i>
+            <span class="links_name">News</span>
+          </a>
+          <span class="tooltip">News</span>
+        </li>
+        <li>
+           <a href="#">
+            <i class='bx bx-planet' ></i>
+             <span class="links_name">Picture of the day</span>
+           </a>
+           <span class="tooltip">APOD</span>
+        </li>
+        <li>
+           <a href="#">
+             <i class='bx bx-info-circle' ></i>
+             <span class="links_name">Info</span>
+           </a>
+           <span class="tooltip">Info</span>
+         </li>
+         <li>
+           <a href="#">
+             <i class='bx bx-cog' ></i>
+             <span class="links_name">Settings</span>
+           </a>
+           <span class="tooltip">Settings</span>
+         </li>
+        </ul>
+      </div>
+      <section class="home-section">
+          <div class="text"></div>  
+          <h1>Astronomy Picture of the Day</h1>
+          <br>
+          <div id="apodImgContainer">
+              <img id="apodImage" src="" alt="Astronomy Picture of the Day">
+          </div>
+          <div id="apodTextContainer">
+              <br>
+              <h2>
+                  <p id="apodTitle"></p>
+              </h2> 
+              <br>
+              <p id="apodExplanation"></p>
+          </div>
+          <script src="imageOfTheDayApi.js"></script>
+      </section>
+      <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
+    
+      closeBtn.addEventListener("click", ()=>{
+        sidebar.classList.toggle("open");
+        menuBtnChange();//calling the function(optional)
+      });
+    
+      searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+    
+      // following are the code to change sidebar button(optional)
+      function menuBtnChange() {
+       if(sidebar.classList.contains("open")){
+         closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+       }else {
+         closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+       }
+      }
+      </script>
 </body>
 </html>
