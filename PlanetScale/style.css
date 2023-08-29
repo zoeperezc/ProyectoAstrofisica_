@@ -1,23 +1,18 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #8C8FC2;
+    background-color: #3A1772;
 }
 
 .container{
-    position:relative;
+    position: fixed;
     right: 100px;
+    top: 25vh;
     width: 500px;
     height: 300px;
     padding: 10px;
-    border: 5px solid black;
     background-color: #B9BBDE;
 }
 
-img{
+.logo{
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -39,5 +34,6 @@ img{
 }
 
 button:hover {
-    background-color: #7a00b3;
+    transition: ease-in;
+    background-color: #3A1772;
 }
