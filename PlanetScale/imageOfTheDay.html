@@ -12,7 +12,7 @@
     <div class="sidebar">
         <div class="logo-details">
           <i class='bx bxl-c-plus-plus icon'></i>
-            <div class="logo_name" >Stargazing</div>
+            <div class="logo_name">Stargazing</div>
             <i class='bx bx-menu' id="btn" ></i>
         </div>
         <ul class="nav-list">
@@ -22,7 +22,7 @@
              <span class="tooltip">Search</span>
           </li>
           <li>
-            <a href = 'indice.html'>
+            <a href="#">
                 <i class='bx bx-home-alt'></i>
               <span class="links_name">Home</span>
             </a>
@@ -30,42 +30,42 @@
           </li>
           <li>
            <a href="#">
-            <i class='bx bx-history' id = 'history'></i>
+            <i class='bx bx-history'></i>
              <span class="links_name">History</span>
            </a>
            <span class="tooltip">History</span>
          </li>
          <li>
-           <a href="image.html">
-            <i class='bx bx-image-alt' id = 'image'></i>
+           <a href="#">
+            <i class='bx bx-image-alt'></i>
              <span class="links_name">Image</span>
            </a>
            <span class="tooltip">Image</span>
         </li>
         <li>
-          <a href="news.html">
-            <i class='bx bx-news' id = 'news'></i>
+          <a href="#">
+            <i class='bx bx-news' ></i>
             <span class="links_name">News</span>
           </a>
           <span class="tooltip">News</span>
         </li>
         <li>
-           <a href="imageOfTheDay.html" id = 'apod'>
-            <i class='bx bx-planet'></i>
+           <a href="#">
+            <i class='bx bx-planet' ></i>
              <span class="links_name">Picture of the day</span>
            </a>
            <span class="tooltip">APOD</span>
         </li>
         <li>
            <a href="#">
-             <i class='bx bx-info-circle' id = 'info' ></i>
+             <i class='bx bx-info-circle' ></i>
              <span class="links_name">Info</span>
            </a>
            <span class="tooltip">Info</span>
          </li>
          <li>
            <a href="#">
-             <i class='bx bx-cog'></i>
+             <i class='bx bx-cog' ></i>
              <span class="links_name">Settings</span>
            </a>
            <span class="tooltip">Settings</span>
@@ -89,8 +89,6 @@
           </div>
           <script src="imageOfTheDayApi.js"></script>
       </section>
-
-
       <script>
       let sidebar = document.querySelector(".sidebar");
       let closeBtn = document.querySelector("#btn");
@@ -98,22 +96,22 @@
     
       closeBtn.addEventListener("click", ()=>{
         sidebar.classList.toggle("open");
-        menuBtnChange();
+        menuBtnChange();//calling the function(optional)
       });
     
-      searchBtn.addEventListener("click", ()=>{
+      searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
         sidebar.classList.toggle("open");
-        menuBtnChange();
+        menuBtnChange(); //calling the function(optional)
       });
     
+      // following are the code to change sidebar button(optional)
       function menuBtnChange() {
        if(sidebar.classList.contains("open")){
-         closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+         closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
        }else {
-         closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
+         closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
        }
       }
-
       </script>
 </body>
 </html>
