@@ -1,28 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
 body {
     background-color: #3A1772;
+    
+    width: 1300px;
+    height: 624px;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.images{
+    grid-column: 1;
 }
 
 .container{
-    position: fixed;
-    right: 100px;
-    top: 25vh;
-    width: 500px;
-    height: 300px;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    grid-column: 2;
+    justify-self: center;
+    align-self: center;
+    align-content: center;
+    justify-content: space-evenly;
     background-color: #B9BBDE;
 }
 
 .logo{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    align-self: center;
     width: 80%;
 }
 
+.text{
+    font-family: 'Rubik', sans-serif;
+    color: #fff;
+    align-self: center;
+    vertical-align: middle;
+}
+
 #redirectButton{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    font-family: 'Rubik', sans-serif;
+    align-self: center;
     padding: 10px 30px;
     font-size: 20px;
     background-color: #8C8FC2;
@@ -36,4 +53,8 @@ body {
 button:hover {
     transition: ease-in;
     background-color: #3A1772;
+}
+
+.background{
+    position: absolute;
 }
