@@ -4,10 +4,11 @@ import * as controllers from "./controllers";
 
 const router = Router();
 
-router.post("/signup", controllers.createUser); //user registration
+router.post("/SignUp", controllers.createUser); //user registration
 router.post("/login", controllers.logInUser); // login
-router.get("/user/:id", controllers.getUser); // ID user
-router.put("/user/:id", controllers.updateUser); // Update user info
-router.put("/user/:id/password", controllers.updatePassword); // Update user password
+router.get("/user/:id", controllers.getUser); // id user
+router.put("/user/:id", controllers.updateUser); // update user info
+router.put("/user/:id/password", controllers.updatePassword); // update user password
+router.put("/user/:id/image", controllers.SumitImage); // user image to analize
 
 export default router;
