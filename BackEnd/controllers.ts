@@ -1,20 +1,12 @@
 import { Request, Response } from "express";
+import express from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import multer from "multer"; 
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Destination folder where the uploaded file will be stored
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname); // Renaming the file to make it unique
-  },
-});
-
-const upload = multer({ storage });
-
 const prisma = new PrismaClient();
+
+const app = express(); // aplicación Express
 
 export async function getUser(req: Request, res: Response) {
 const id = parseInt(req.params.id);
@@ -161,6 +153,33 @@ return res.status(400).json("Error");
 }
 }
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // carpeta de destino 
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9); // Generar unique
+    cb(null, uniqueSuffix + '-' + file.originalname); // Renombrar el archivo 
+  },
 
+});
 
-export { prisma }; 
+const upload = multer({ storage });
+
+app.post('/upload-image', upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json("No se ha subido ninguna imagen.");
+    }
+
+    // Aquí puedes guardar el nombre de la imagen (req.file.filename) en la base de datos
+    // Puedes usar Prisma o la herramienta que estés utilizando para interactuar con la base de datos
+
+    return res.status(201).json("Imagen subida correctamente.");
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json("Error al subir la imagen.");
+  }
+});
+
+export { prisma, app }; 
