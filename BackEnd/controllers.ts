@@ -182,4 +182,21 @@ app.post('/upload-image', upload.single('image'), async (req, res) => {
   }
 });
 
+export async function getDONKINews(req: Request, res: Response) {
+  try {
+    const apiKey = 'TU_API_KEY'; // Reemplaza con tu propia API key de NASA DONKI
+    const startDate = 'yyyy-MM-dd'; // Especifica la fecha de inicio
+    const endDate = 'yyyy-MM-dd'; // Especifica la fecha de fin
+
+    const response = await axios.get(`https://api.nasa.gov/DONKI/notifications?startDate=${startDate}&endDate=${endDate}&type=all&api_key=${apiKey}`);
+
+    // Maneja la respuesta de DONKI aquí, por ejemplo, puedes enviarla como respuesta a tu cliente
+    res.status(200).json(response.data);
+  } catch (error) {
+    // Maneja los errores aquí
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener noticias de DONKI' });
+  }
+}
+
 export { prisma, app }; 
