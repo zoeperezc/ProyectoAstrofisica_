@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
 body {
     background-image: url(../Diseño/fondoInicio.svg);
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    //background-color: #b9bbde;
 
 
     display: grid;
