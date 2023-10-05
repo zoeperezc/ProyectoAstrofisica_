@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
 body {
-    background-color: #3A1772;
-    
-    width: 1300px;
-    height: 624px;
+    background-image: url(../Diseño/fondoInicio.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    //background-color: #b9bbde;
+
 
     display: grid;
     grid-template-rows: 1fr;
@@ -22,7 +24,6 @@ body {
     align-self: center;
     align-content: center;
     justify-content: space-evenly;
-    background-color: #B9BBDE;
 }
 
 .logo{
