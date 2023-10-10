@@ -5,15 +5,10 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 
-
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 0.33fr);
 }
 
-.images{
-    grid-column: 1;
-}
 
 .container{
     display: flex;
@@ -65,11 +60,41 @@ body {
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.50);
 }
 
-button:hover {
+.RedirectButton:hover {
     transition: ease-in;
     background-color: #3A1772;
 }
 
 .background{
     position: absolute;
+}
+
+.bar{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px ;
+    display: flex;
+    flex-direction: row;
+    grid-column: 1;
+    justify-content: space-evenly;
+}
+
+.bar a{
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+}
+
+.bar a:hover{
+    font-weight: bold;
+}
+
+.stars{
+    grid-column: 1;
+    margin-top: 15px;
+    margin-left: 65px;
+}
+
+.starsimg{
+    height: 85%;
 }
