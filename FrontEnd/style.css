@@ -1,15 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
 body {
     background-image: url(../Diseño/fondoInicio.svg);
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    //background-color: #b9bbde;
 
 
     display: grid;
-    grid-template-rows: 1fr;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 0.33fr);
 }
 
 .images{
@@ -20,6 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     grid-column: 2;
+    grid-row: 2;
     justify-self: center;
     align-self: center;
     align-content: center;
@@ -36,19 +36,33 @@ body {
     color: #fff;
     align-self: center;
     vertical-align: middle;
+    font-size: 20px;
+    font-weight: 500;
+    word-spacing: 4px;
+    letter-spacing: 1px;
 }
 
-#redirectButton{
+.separator{
+    align-self: center;
+    border-radius: 4px;
+    background: #FAFAFD;
+    width: 130px;
+    height: 4px;
+}
+
+.RedirectButton{
+    text-decoration: none;
     font-family: 'Rubik', sans-serif;
     align-self: center;
-    padding: 10px 30px;
-    font-size: 20px;
+    padding: 8px 25px;
+    font-size: 25px;
     background-color: #8C8FC2;
     color: white;
+    font-weight: 500;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.50);
 }
 
 button:hover {
