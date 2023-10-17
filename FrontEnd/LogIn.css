@@ -2,7 +2,7 @@
 html, body * { box-sizing: border-box; font-family: 'Rubik', sans-serif; }
 
 body {
-  background: #B9BBDE;
+  background-image: url(../Diseño/fondoSingUp.png);
   background-size: cover;
 }
 
@@ -69,7 +69,7 @@ li {
 
 .signin-inactive a {
   padding-bottom: 0;
-  color: rgba(255,255,255,.3);
+  color: #fff;
   text-decoration: none;
   border-bottom: none;
   cursor: pointer;
@@ -88,7 +88,7 @@ li {
 
 .signup-inactive a {
   cursor: pointer;
-  color: rgba(255,255,255,.3);
+  color: #fff;
   text-decoration: none;
   transition: all .25s ease;
   font-weight: bold;
@@ -342,3 +342,4 @@ a.btn-signup:hover, a.btn-signin:hover {
 .forgot a:hover{
   opacity: 0.5;
 }
+
