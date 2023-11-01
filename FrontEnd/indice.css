@@ -1,24 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
 body{
-    background-color: #3A1772;
+    background-image: url(../Diseño/Fondo\ Constelaciones.png);
+    background-size: cover;
     font-family: 'Rubik', sans-serif;
     text-align: center;
 }
 
+/* HEADER */
+
 header{
-    margin-top: 20px;
+    margin-left: 40px;
+    margin-top: 63px;
     display: flex;
 }
 
 svg:first-child{
-    width: 60px;
+    width: px;
+    margin-left: 40px;
+}
+
+.explore{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-top: 15px;
 }
 
 .explore img{
-    width: 600px;
-    margin-top: ;
+    width: 650px;
 }
 
+p{
+    font-size: 25px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: left;
+    margin-top: 13px;
+    color: #FFFFFF;
+    opacity: 75%;
+
+}
+
+.history, .profile {
+    width: 65px;
+}
+
+.history {
+    margin-left: 235px;
+}
+
+.profile{
+    margin-left: 60px;
+}
 
 /*OPTIONS*/
 
@@ -26,7 +59,9 @@ svg:first-child{
     justify-content: center;
     display: flex;
     flex-direction: row;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 65px;
 }
 
 .container{
@@ -37,75 +72,74 @@ svg:first-child{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
-    height: 220px;
-    transition: ease-out, 0.5s;
+    width: 265px;
+    height: 300px;
+    transition: ease-out, 0.7s;
 }
+
 
 .container:hover{
     position: relative;
-    transition: ease-in, 0.5s;
-    height: 250px;
-    width: 210px;
+    transition: ease-in, 0.7s;
+    height: 350px;
     background-color: #8C8FC2;
-    transition: ease-in,;
 }
 
 
 .icon{
-    margin-top: 20px;
+    margin-top: 25px;
     margin-bottom: 20px;
-    width: 50px;
+    width: 80px;
 }
 
 .iconimg{
-    margin-top: 20px;
+    margin-top: 25px;
     margin-bottom: 20px;
-    width: 70px;
+    width: 100px;
 }
 
 .tittle{
     margin-bottom: 15px;
     color: #FFF;
-    font-size: 25px;
+    font-size: 35px;
     font-weight: 500;
 }
 
 .text{
     color: #FFF;
-    font-size: 17px;
+    font-size: 22px;
     
 }
 
 .go{
     align-content: center;
-    display: none;
     text-decoration: none;
     color: #FFF;
-    font-size: 20px;
-    margin-top: 10px;
+    font-size: 25px;
+    margin-top: 30px;
     justify-self: flex-end;
     background-color: #6063A3;
     align-self: center;
-    padding: 2px 8px;   
+    padding: 7px 22px;   
     font-weight: 500;
     border: none;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 17px;
     box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.50);
-    transition: ease-out, 0.5s;
+    transition: ease-in, 0.5s;
+    opacity: 0;
 }
 
 .container:last-child .go{
-    margin-top: 25px;
+    margin-top: 45px;
 }
 
 .arrow {
-    justify-self: center;
     height: 50%;
+    margin-bottom: 2px;
 }
 
 .container:hover .go{
-    display: block;
-    transition: ease-in, 0.5s;
+    transition: opacity, 1.5s;
+    opacity: 1;
 }
