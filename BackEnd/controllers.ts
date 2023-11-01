@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import express from "express";
 import { PrismaClient } from "@prisma/client";
-//import from "bcrypt";
+import bcrypt from "bcrypt";
 import multer from "multer";
-//import FastAPI from "fastapi";
+import FastAPI from "fastapi";
 
 const prisma = new PrismaClient();
 
