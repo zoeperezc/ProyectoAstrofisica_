@@ -3,6 +3,7 @@ import express from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import multer from "multer";
+import FastAPI from "fastapi";
 
 const prisma = new PrismaClient();
 
@@ -153,7 +154,7 @@ export async function updatePassword(req: Request, res: Response) {
   }
 }
 
-const storage = multer.diskStorage({
+ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/"); // carpeta de destino
   },
@@ -172,13 +173,45 @@ app.post("/upload-image", upload.single("image"), async (req, res) => {
     }
 
     // Aquí puedes guardar el nombre de la imagen (req.file.filename) en la base de datos
-    // Puedes usar Prisma o la herramienta que estés utilizando para interactuar con la base de datos
-
+  
     return res.status(201).json("Imagen subida correctamente.");
   } catch (err) {
     console.error(err);
     return res.status(500).json("Error al subir la imagen.");
   }
 });
+
+export async function getLibery(req: Request, res: Response) {
+  const id = parseInt(req.params.id!);
+  const user_exist = await prisma.user.findUnique({
+    where: { id },
+  });
+  if (!user_exist) {
+    return res.status(404).json("El usuario no existe");
+  }
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        surname: true,
+        Image: {
+          where: { image_id: id },
+          select: {
+            url: true,
+            image_type: true,
+          },
+        },
+      },
+    });
+    if (!user) {
+      return res.status(404).json("User not found");
+    }
+    return res.status(200).json(user);
+  } catch (err: any) {
+    return res.status(400).json(err.message);
+  }
+}
 
 export { prisma, app };

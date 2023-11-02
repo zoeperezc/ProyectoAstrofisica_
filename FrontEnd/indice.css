@@ -1,54 +1,145 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
 body{
-    background-color: #6063A3;
+    background-image: url(../Diseño/Fondo\ Constelaciones.png);
+    background-size: cover;
     font-family: 'Rubik', sans-serif;
-
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
+    text-align: center;
 }
 
+/* HEADER */
+
+header{
+    margin-left: 40px;
+    margin-top: 63px;
+    display: flex;
+}
+
+svg:first-child{
+    width: px;
+    margin-left: 40px;
+}
+
+.explore{
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-top: 15px;
+}
+
+.explore img{
+    width: 650px;
+}
+
+p{
+    font-size: 25px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-align: left;
+    margin-top: 13px;
+    color: #FFFFFF;
+    opacity: 75%;
+
+}
+
+.history, .profile {
+    width: 65px;
+}
+
+.history {
+    margin-left: 235px;
+}
+
+.profile{
+    margin-left: 60px;
+}
+
+/*OPTIONS*/
+
 .options{
-    grid-row: 2;
+    justify-content: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 65px;
 }
 
 .container{
+    margin-left: 20px;
+    margin-right: 20px;
     background: #B9BBDE;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 200px;
-    height: 250px;
+    width: 265px;
+    height: 300px;
+    transition: ease-out, 0.7s;
 }
 
+
+.container:hover{
+    position: relative;
+    transition: ease-in, 0.7s;
+    height: 350px;
+    background-color: #8C8FC2;
+}
+
+
 .icon{
-    margin-top: 20px;
+    margin-top: 25px;
     margin-bottom: 20px;
-    width: 30%;
+    width: 80px;
+}
+
+.iconimg{
+    margin-top: 25px;
+    margin-bottom: 20px;
+    width: 100px;
 }
 
 .tittle{
     margin-bottom: 15px;
     color: #FFF;
-    font-size: 25px;
+    font-size: 35px;
     font-weight: 500;
 }
 
 .text{
     color: #FFF;
-    font-size: 17px;
+    font-size: 22px;
+    
 }
 
 .go{
-    display: none;
+    align-content: center;
     text-decoration: none;
     color: #FFF;
     font-size: 25px;
+    margin-top: 30px;
+    justify-self: flex-end;
+    background-color: #6063A3;
+    align-self: center;
+    padding: 7px 22px;   
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    border-radius: 17px;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.50);
+    transition: ease-in, 0.5s;
+    opacity: 0;
 }
 
-.container:hover + .go{
-    display: block;
+.container:last-child .go{
+    margin-top: 45px;
+}
+
+.arrow {
+    height: 50%;
+    margin-bottom: 2px;
+}
+
+.container:hover .go{
+    transition: opacity, 1.5s;
+    opacity: 1;
 }
