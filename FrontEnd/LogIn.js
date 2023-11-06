@@ -19,8 +19,7 @@ const password_2 = document.getElementById('password_2').value;
 document.getElementById('loginForm').addEventListener('submit', (e) => {
   e.preventDefault();
 
-
-  fetch('/api/login', {
+  fetch('/login', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
@@ -40,5 +39,4 @@ document.getElementById('loginForm').addEventListener('submit', (e) => {
 .catch(error => {
     console.error(error);
 });
-
 });
