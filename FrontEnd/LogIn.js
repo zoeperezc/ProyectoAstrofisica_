@@ -10,14 +10,15 @@ $(function() {
 	});
 });
 
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+const username = document.getElementById('username').value;
+const password = document.getElementById('password').value;
+const email = document.getElementById('mail').value;
+const password_1 = document.getElementById('password_1').value;
+const password_2 = document.getElementById('password_2').value;
+
+document.getElementById('loginForm').addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  const email = document.getElementById('mail').value;
-  const password_1 = document.getElementById('password_1').value;
-  const password_2 = document.getElementById('password_2').value;
 
   fetch('/api/login', {
     method: 'POST',
