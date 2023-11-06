@@ -8,67 +8,61 @@ $(function() {
       $(".forgot").toggleClass("forgot-left");
       $(this).removeClass("idle").addClass("active");
     });
-  
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-  
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-  
-      fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      })
-      .then(response => response.json())
-      .then(data => {
-        const message = document.getElementById('message');
-        if (data.message === "Login successful") {
-          message.innerHTML = `¡Bienvenido, ${data.user.username}!`;
-        } else {
-          message.innerHTML = data.message;
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    });
-  });
-
-  document.getElementById('signupForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password_1 = document.getElementById('password_1').value;
-    const password_2 = document.getElementById('password_2').value;
-
-    fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    })
-    .then(response => response.json())
-    .then(data => {
-      const message = document.getElementById('message');
-      if (data.message === "Login successful") {
-        message.innerHTML = `¡Bienvenido, ${data.user.username}!`;
-      } else {
-        message.innerHTML = data.message;
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  });
- 
-
+const logIn = document.getElementById('loginForm')
 const username = document.getElementById('username').value;
 const password = document.getElementById('password').value;
+const register = document.getElementById('signupForm')
 const email = document.getElementById('mail').value;
 const password_1 = document.getElementById('password_1').value;
 const password_2 = document.getElementById('password_2').value;
+
+register.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    fetch('http://localhost:3000/register', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username.value,
+        email: emailt.value,
+        password: password_1.value,
+        passwordConfirm: password_2.value,
+      })
+    })
+      .then(response => {
+        return response.json()
+  
+      })
+      .catch(error => {
+        console.error(error)
+      });
+  });
+  
+  logIn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username.value,
+        password: password.value,
+      })
+    })
+      })
+      .then(data => {
+        console.log(data)
+        if (data.success) {
+          window.location.href = "http://localhost:3000/pagina-inicial";
+        }
+      })
+      .catch(error => {
+        console.error(error)
+  });
+});
