@@ -12,5 +12,10 @@ app.use(cors());
 app.use(cookieParser());
 app.use(router);
 
-const PORT: Number = 3000;
-app.listen(PORT, () => console.log("Alive on localhost: " + PORT));
+app.use("/", router); // Use the router for all routes
+
+const PORT: number = 3000;
+
+app.listen(PORT, () => {
+  console.log("Server is alive on localhost:" + PORT);
+});
