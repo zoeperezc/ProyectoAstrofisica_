@@ -193,17 +193,14 @@ export async function getLibery(req: Request, res: Response) {
       where: { id },
       select: {
         id: true,
-        name: true,
-        surname: true,
+        username: true,
         Image: {
-          where: { image_id: id },
-          select: {
-            url: true,
-            image_type: true,
+           image_id: true,
+           image_type: true,
           },
         },
       },
-    });
+    );
     if (!user) {
       return res.status(404).json("User not found");
     }
