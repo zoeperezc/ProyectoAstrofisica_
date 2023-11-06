@@ -11,8 +11,8 @@ $(function() {
 const logIn = document.getElementById('login')
 const username = document.getElementById('username').value;
 const password = document.getElementById('password').value;
-const register = document.getElementById('register')
-const email = document.getElementById('email').value;
+const register = document.getElementById('signupForm')
+const mail = document.getElementById('mail').value;
 const password_1 = document.getElementById('password_1').value;
 const password_2 = document.getElementById('password_2').value;
 
@@ -27,7 +27,7 @@ register.addEventListener('click', (e) => {
       },
       body: JSON.stringify({
         username: username.value,
-        email: email.value,
+        mail: mail.value,
         password: password_1.value,
         passwordConfirm: password_2.value,
       })

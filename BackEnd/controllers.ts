@@ -32,7 +32,7 @@ export async function getUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-  const { name, mail, password } = req.body;
+  const { username, mail, password, passwordConfirm } = req.body;
 
   try {
     const emailExists = await prisma.user.findUnique({
@@ -45,11 +45,12 @@ export async function createUser(req: Request, res: Response) {
       return res.status(400).json("Mail already exists in the database");
     }
 
-    const hashed_password = await bcrypt.hash(password, 10);
+    const hashed_password = bcrypt.hashSync(password, 10);
 
     const user = await prisma.user.create({
       data: {
-        name,
+        name: "",
+        username,
         mail,
         password: hashed_password,
       },
