@@ -3,7 +3,7 @@ import express from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import multer from "multer";
-import FastAPI from "fastapi";
+//import FastAPI from "fastapi";
 
 const prisma = new PrismaClient();
 
@@ -180,7 +180,6 @@ app.post("/upload-image", upload.single("image"), async (req, res) => {
     return res.status(500).json("Error al subir la imagen.");
   }
 });
-
 export async function getLibery(req: Request, res: Response) {
   const id = parseInt(req.params.id!);
   const user_exist = await prisma.user.findUnique({
