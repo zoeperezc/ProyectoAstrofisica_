@@ -194,13 +194,9 @@ export async function getLibery(req: Request, res: Response) {
       select: {
         id: true,
         username: true,
-        Image: {
-           image_id: true,
-           image_type: true,
-          },
-        },
+        Image: true
       },
-    );
+  });
     if (!user) {
       return res.status(404).json("User not found");
     }
