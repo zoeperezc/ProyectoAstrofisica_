@@ -38,8 +38,8 @@ $(function() {
       .then(data => {
         console.log(data);
         if (data.success) {
-          // Redirige al usuario a la página de subir imágenes si el registro es exitoso
-          window.location.href = "http://localhost:3000/upload-image";
+          // Redirige al usuario a la página de inicio si el registro es exitoso
+          window.location.href = "http://localhost:3000/indice";
         }
       })
       .catch(error => {
@@ -74,7 +74,7 @@ $(function() {
       .then(data => {
         console.log(data);
         if (data.success) {
-            window.location.href = "http://localhost:3000/upload-image";
+            window.location.href = "http://localhost:3000/indice";
         }
       })
       .catch(error => {
