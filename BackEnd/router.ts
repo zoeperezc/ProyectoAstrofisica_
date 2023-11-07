@@ -10,7 +10,7 @@ router.post("/login", controllers.logInUser); // login
 router.get("/user/:id", controllers.getUser); // id user
 router.put("/user/:id", controllers.updateUser); // update user info
 router.put("/user/:id/password", controllers.updatePassword); // update user password
-//router.put("/upload-image", controllers.uploadImage); // user image to analize
+router.post("/upload-image", controllers.uploadImage); // user image to analize
 router.get("/user/:id/libery", controllers.getLibery);
 
 // ruta /donki-news

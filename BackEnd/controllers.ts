@@ -173,22 +173,31 @@ export async function updatePassword(req: Request, res: Response) {
   },
 });
 
-const upload = multer({ storage });
+export async function uploadImage(req: Request, res: Response) {
+  const upload = multer({ storage });
 
-app.post("/upload-image", upload.single("image"), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json("No se ha subido ninguna imagen.");
+  // Utiliza el middleware de multer para manejar la subida de imágenes
+  upload.single("image")(req, res, async (err: any) => {
+    try {
+      if (err) {
+        return res.status(400).json("Error al subir la imagen: " + err.message);
+      }
+
+      if (!req.file) {
+        return res.status(400).json("No se ha subido ninguna imagen.");
+      }
+
+      // Aquí puedes guardar el nombre de la imagen (req.file.filename) en la base de datos
+      // Realiza la lógica de guardado en la base de datos aquí
+
+      return res.status(201).json("Imagen subida correctamente.");
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json("Error al subir la imagen.");
     }
+  });
+}
 
-    // Aquí puedes guardar el nombre de la imagen (req.file.filename) en la base de datos
-  
-    return res.status(201).json("Imagen subida correctamente.");
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json("Error al subir la imagen.");
-  }
-});
 export async function getLibery(req: Request, res: Response) {
   const id = parseInt(req.params.id!);
   const user_exist = await prisma.user.findUnique({

@@ -79,7 +79,6 @@ $(function() {
   const register = document.getElementById('signupForm');
   const logIn = document.getElementById('login');
 
-
   register.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -88,12 +87,6 @@ $(function() {
     const mail = document.getElementById('mail').value;
     const password_1 = document.getElementById('password_1').value;
     const password_2 = document.getElementById('password_2').value;
-
-    // Verifica que las contraseñas coincidan antes de enviar la solicitud
-    if (password_1 !== password_2) {
-      console.error("Las contraseñas no coinciden");
-      return;
-    }
 
     fetch('http://localhost:3000/register', {
       method: 'POST',
@@ -111,12 +104,20 @@ $(function() {
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        // Puedes agregar lógica adicional aquí según la respuesta del servidor
+        if (data.success) {
+          // Redirige al usuario a la página de subir imágenes si el registro es exitoso
+          window.location.href = "http://localhost:3000/upload-image";
+        }
       })
       .catch(error => {
         console.error(error);
       });
   });
+  
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
   logIn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -140,12 +141,10 @@ $(function() {
       .then(data => {
         console.log(data);
         if (data.success) {
-          // Redirige al usuario a la página de inicio si la autenticación es exitosa
-          window.location.href = "http://localhost:3000/pagina-inicial";
+            window.location.href = "http://localhost:3000/upload-image";
         }
       })
       .catch(error => {
         console.error(error);
       });
   });
-});
