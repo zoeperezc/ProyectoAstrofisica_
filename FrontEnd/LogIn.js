@@ -9,7 +9,7 @@ $(function() {
     $(this).removeClass("idle").addClass("active");
   });
 
-  const register = document.getElementById('signupForm');
+  const register = document.getElementById('register');
   const logIn = document.getElementById('login');
 
   register.addEventListener('click', (e) => {
