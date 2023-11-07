@@ -226,7 +226,7 @@ export async function getLibery(req: Request, res: Response) {
 
 export const getApodData = (req: Request, res: Response) => {
   const apiKey = "UJiVXjcI3Wg7Qdy2WGzUQVQUF37bJPvq7bIt6qJE";
-  const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKeys}`;
+  const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
   fetch(apiUrl)
     .then((response) => response.json())
