@@ -10,10 +10,8 @@ router.post("/login", controllers.logInUser); // login
 router.get("/indice", (req, res) => {
   // Enviar el contenido HTML de "indice.html" como respuesta
   const fs = require("fs");
-  
- 
-const path = require("path");
-  const indexPath = path.join(__dirname, "indice.html"); // Asegúrate de ajustar la ruta correcta
+  const path = require("path");
+  const indexPath = path.join(__dirname, "indice.html"); 
   fs.readFile(indexPath, "utf8", (err: Error | null, data: string) => {
     if (err) {
       console.error(err);
