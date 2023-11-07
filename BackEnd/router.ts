@@ -5,7 +5,7 @@ import { updateDONKINews } from "./cronJobs";
 
 const router = Router();
 
-router.post("/SignUp", controllers.createUser); //user registration
+router.post("/register", controllers.createUser); //user registration
 router.post("/login", controllers.logInUser); // login
 router.get("/user/:id", controllers.getUser); // id user
 router.put("/user/:id", controllers.updateUser); // update user info

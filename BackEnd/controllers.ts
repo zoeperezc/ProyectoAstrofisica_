@@ -34,6 +34,10 @@ export async function getUser(req: Request, res: Response) {
 export async function createUser(req: Request, res: Response) {
   const { username, mail, password, passwordConfirm } = req.body;
 
+  if (password !== passwordConfirm) {
+    return res.status(400).json("Las contraseñas no coinciden");
+  }
+
   try {
     const emailExists = await prisma.user.findUnique({
       where: {
@@ -55,6 +59,10 @@ export async function createUser(req: Request, res: Response) {
         password: hashed_password,
       },
     });
+
+     if (password !== passwordConfirm) {
+    return res.status(400).json("Las contraseñas no coinciden");
+  }
 
     return res.status(201).json(user);
   } catch (err) {
