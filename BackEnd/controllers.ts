@@ -224,4 +224,23 @@ export async function getLibery(req: Request, res: Response) {
   }
 }
 
+export const getApodData = (req: Request, res: Response) => {
+  const apiKey = "UJiVXjcI3Wg7Qdy2WGzUQVQUF37bJPvq7bIt6qJE";
+  const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      res.status(200).json({
+        url: data.url,
+        title: data.title,
+        explanation: data.explanation,
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+      res.status(500).json({ error: "Failed to fetch APOD data" });
+    });
+};
+
 export { prisma, app };
