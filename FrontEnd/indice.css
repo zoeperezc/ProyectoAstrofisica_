@@ -15,7 +15,7 @@ header{
 }
 
 svg:first-child{
-    width: px;
+    width: 70px;
     margin-left: 40px;
 }
 
@@ -43,6 +43,7 @@ p{
 
 .history, .profile {
     width: 65px;
+    cursor: pointer;
 }
 
 .history {
