@@ -4,17 +4,14 @@ const goApod = document.getElementById('goApod');
 //const goSearch = document.getElementById('goSearch');
 
 goImage.addEventListener('click', () => {
-  // Redirige al usuario a la ruta /upload-image
   window.location.href = "/upload-image";
 });
 
 goNews.addEventListener('click', () => {
-  // Redirige al usuario a la ruta correspondiente, por ejemplo, "/donki-news"
   window.location.href = "/NASA-news";
 });
 
 goApod.addEventListener('click', () => {
-  // Redirige al usuario a la ruta correspondiente, por ejemplo, "/apod"
   window.location.href = "/apod";
 });
 

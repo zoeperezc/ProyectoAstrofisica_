@@ -28,7 +28,6 @@ router.put("/user/:id/password", controllers.updatePassword); // update user pas
 router.post("/upload-image", controllers.uploadImage); // user image to analize
 router.get("/user/:id/libery", controllers.getLibery);
 
-// ruta /donki-news
 router.get('/NASA-news', (req, res) => {
   updateDONKINews(); 
   res.status(200).json({ message: 'Actualizando noticias de DONKI' });
