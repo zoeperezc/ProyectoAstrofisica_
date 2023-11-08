@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.app = exports.prisma = exports.updatePassword = exports.updateUser = exports.logInUser = exports.createUser = exports.getUser = void 0;
+exports.app = exports.prisma = exports.getApodData = exports.getLibery = exports.uploadImage = exports.updatePassword = exports.updateUser = exports.logInUser = exports.createUser = exports.getUser = void 0;
 const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const multer_1 = __importDefault(require("multer"));
+//import FastAPI from "fastapi";
 const prisma = new client_1.PrismaClient();
 exports.prisma = prisma;
 const app = (0, express_1.default)(); // aplicación Express
@@ -46,7 +47,10 @@ function getUser(req, res) {
 exports.getUser = getUser;
 function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { name, mail, password } = req.body;
+        const { username, mail, password, passwordConfirm } = req.body;
+        if (password !== passwordConfirm) {
+            return res.status(400).json("Las contraseñas no coinciden");
+        }
         try {
             const emailExists = yield prisma.user.findUnique({
                 where: {
@@ -56,14 +60,18 @@ function createUser(req, res) {
             if (emailExists) {
                 return res.status(400).json("Mail already exists in the database");
             }
-            const hashed_password = yield bcrypt_1.default.hash(password, 10);
+            const hashed_password = bcrypt_1.default.hashSync(password, 10);
             const user = yield prisma.user.create({
                 data: {
-                    name,
+                    name: "",
+                    username,
                     mail,
                     password: hashed_password,
                 },
             });
+            if (password !== passwordConfirm) {
+                return res.status(400).json("Las contraseñas no coinciden");
+            }
             return res.status(201).json(user);
         }
         catch (err) {
@@ -167,18 +175,74 @@ const storage = multer_1.default.diskStorage({
         cb(null, uniqueSuffix + "-" + file.originalname); // Renombrar el archivo
     },
 });
-const upload = (0, multer_1.default)({ storage });
-app.post("/upload-image", upload.single("image"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        if (!req.file) {
-            return res.status(400).json("No se ha subido ninguna imagen.");
+function uploadImage(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const upload = (0, multer_1.default)({ storage });
+        // Utiliza el middleware de multer para manejar la subida de imágenes
+        upload.single("image")(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (err) {
+                    return res.status(400).json("Error al subir la imagen: " + err.message);
+                }
+                if (!req.file) {
+                    return res.status(400).json("No se ha subido ninguna imagen.");
+                }
+                // Aquí puedes guardar el nombre de la imagen (req.file.filename) en la base de datos
+                // Realiza la lógica de guardado en la base de datos aquí
+                return res.status(201).json("Imagen subida correctamente.");
+            }
+            catch (err) {
+                console.error(err);
+                return res.status(500).json("Error al subir la imagen.");
+            }
+        }));
+    });
+}
+exports.uploadImage = uploadImage;
+function getLibery(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const id = parseInt(req.params.id);
+        const user_exist = yield prisma.user.findUnique({
+            where: { id },
+        });
+        if (!user_exist) {
+            return res.status(404).json("El usuario no existe");
         }
-        // Aquí puedes guardar el nombre de la imagen (req.file.filename) en la base de datos
-        // Puedes usar Prisma o la herramienta que estés utilizando para interactuar con la base de datos
-        return res.status(201).json("Imagen subida correctamente.");
-    }
-    catch (err) {
-        console.error(err);
-        return res.status(500).json("Error al subir la imagen.");
-    }
-}));
+        try {
+            const user = yield prisma.user.findUnique({
+                where: { id },
+                select: {
+                    id: true,
+                    username: true,
+                    Image: true
+                },
+            });
+            if (!user) {
+                return res.status(404).json("User not found");
+            }
+            return res.status(200).json(user);
+        }
+        catch (err) {
+            return res.status(400).json(err.message);
+        }
+    });
+}
+exports.getLibery = getLibery;
+const getApodData = (req, res) => {
+    const apiKey = "UJiVXjcI3Wg7Qdy2WGzUQVQUF37bJPvq7bIt6qJE";
+    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+    fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+        res.status(200).json({
+            url: data.url,
+            title: data.title,
+            explanation: data.explanation,
+        });
+    })
+        .catch((error) => {
+        console.error("Error fetching data:", error);
+        res.status(500).json({ error: "Failed to fetch APOD data" });
+    });
+};
+exports.getApodData = getApodData;

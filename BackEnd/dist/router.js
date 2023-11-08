@@ -25,18 +25,32 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllers = __importStar(require("./controllers"));
-const cronJobs_1 = require("./cronJobs");
+const index_1 = require("./index");
 const router = (0, express_1.Router)();
-router.post("/SignUp", controllers.createUser); //user registration
+router.post("/register", controllers.createUser); //user registration
 router.post("/login", controllers.logInUser); // login
+router.get("/indice", (_, res) => {
+    // "indice.html" como respuesta
+    const fs = require("fs");
+    const path = require("path");
+    const indexPath = path.join(__dirname, "indice.html");
+    fs.readFile(indexPath, "utf8", (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send("Error al cargar la página 'indice.html'");
+        }
+        else {
+            res.status(200).send(data);
+        }
+    });
+});
+router.get("/apod-data", controllers.getApodData); // ImageOftheDayApi
 router.get("/user/:id", controllers.getUser); // id user
 router.put("/user/:id", controllers.updateUser); // update user info
 router.put("/user/:id/password", controllers.updatePassword); // update user password
-router.put("/upload-image", controllers.); // user image to analize QUEEEEEEEEEE AAAAAAAAAAAAAAAAAAA
-//router.put("/libery", controllers.);
-// ruta /donki-news
-router.get('/donki-news', (req, res) => {
-    (0, cronJobs_1.updateDONKINews)();
-    res.status(200).json({ message: 'Actualizando noticias de DONKI' });
+router.post("/upload-image", controllers.uploadImage); // user image to analize
+router.get("/user/:id/libery", controllers.getLibery);
+router.get('/NASA-news', (req, res) => {
+    res.status(200).json({ data: index_1.news, lastUpdated: index_1.lastUpdated });
 });
 exports.default = router;

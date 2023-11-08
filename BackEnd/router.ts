@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import * as controllers from "./controllers";
 import { updateDONKINews } from "./cronJobs";
+import { lastUpdated, news } from "./index";
 
 const router = Router();
 
@@ -29,8 +30,7 @@ router.post("/upload-image", controllers.uploadImage); // user image to analize
 router.get("/user/:id/libery", controllers.getLibery);
 
 router.get('/NASA-news', (req, res) => {
-  updateDONKINews(); 
-  res.status(200).json({ message: 'Actualizando noticias de DONKI' });
+  res.status(200).json({ data: news, lastUpdated});
 });
 
 
