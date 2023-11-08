@@ -1,6 +1,7 @@
 const goImage = document.getElementById('goImage');
 const goNews = document.getElementById('goNews');
 const goApod = document.getElementById('goApod');
+const history = document.getElementById('history'); //Te lleva a la pagina del historial osea history.html
 //const goSearch = document.getElementById('goSearch');
 
 goImage.addEventListener('click', () => {
