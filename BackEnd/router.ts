@@ -8,7 +8,7 @@ const router = Router();
 router.post("/register", controllers.createUser); //user registration
 router.post("/login", controllers.logInUser); // login
 router.get("/indice", (_, res) => {
-  // Enviar el contenido HTML de "indice.html" como respuesta
+  // "indice.html" como respuesta
   const fs = require("fs");
   const path = require("path");
   const indexPath = path.join(__dirname, "indice.html"); 
