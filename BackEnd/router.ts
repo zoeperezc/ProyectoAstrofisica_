@@ -8,7 +8,7 @@ const router = Router();
 router.post("/register", controllers.createUser); //user registration
 router.post("/login", controllers.logInUser); // login
 router.get("/indice", (_, res) => {
-  // Enviar el contenido HTML de "indice.html" como respuesta
+  // "indice.html" como respuesta
   const fs = require("fs");
   const path = require("path");
   const indexPath = path.join(__dirname, "indice.html"); 
@@ -28,7 +28,6 @@ router.put("/user/:id/password", controllers.updatePassword); // update user pas
 router.post("/upload-image", controllers.uploadImage); // user image to analize
 router.get("/user/:id/libery", controllers.getLibery);
 
-// ruta /donki-news
 router.get('/NASA-news', (req, res) => {
   updateDONKINews(); 
   res.status(200).json({ message: 'Actualizando noticias de DONKI' });
