@@ -11,8 +11,8 @@ import axios from 'axios';
     // Aquí puedes manejar la respuesta de DONKI
     const newsData = response.data;
     // Realiza las acciones necesarias para almacenar o actualizar los datos en tu aplicación
-
-    console.log(newsData); 
+    const newsContainer = document.getElementById('news-container');
+    newsContainer.innerHTML = JSON.stringify(newsData, null, 2);
    
   } catch (error) {
     console.error('Error al obtener noticias de DONKI:', error);
