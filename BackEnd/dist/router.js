@@ -49,7 +49,7 @@ router.get("/user/:id", controllers.getUser); // id user
 router.put("/user/:id", controllers.updateUser); // update user info
 router.put("/user/:id/password", controllers.updatePassword); // update user password
 router.post("/upload-image", controllers.uploadImage); // user image to analize
-router.get("/user/:id/libery", controllers.getLibery);
+router.get("/user/:id/history", controllers.getLibery);
 router.get('/NASA-news', (req, res) => {
     res.status(200).json({ data: index_1.news, lastUpdated: index_1.lastUpdated });
 });

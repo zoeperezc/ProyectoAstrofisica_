@@ -16,5 +16,5 @@ goApod.addEventListener('click', () => {
 });
 
 history.addEventListener('click', () => {
-  window.location.href = "//user/:id/libery";
+  window.location.href = "//user/:id/history";
 });
