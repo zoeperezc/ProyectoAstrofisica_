@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href = "image.css" rel = "stylesheet">
+    <link href = "upload-image.css" rel = "stylesheet">
     <link href = "sidebar.css" rel = "stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Image</title>
@@ -79,7 +79,10 @@
         </ul>
       </div>
       <section class="home-section">
-            <img src="../Diseño/Upload Image TEXTO.png" alt="">
+        <div>
+          <header>
+          <img src="../Diseño/Upload Image TEXTO.png" alt="">
+        </header>
       <div class="container">
         <div class="drop">
           <label for="imageInput">
@@ -90,10 +93,11 @@
           <input type="file" id="imageInput" accept=".jpeg, .jpg, .png" />
           <p class="droptxt">Drag & Drop</p>
         </div>
-        <button id="uploadBtn">Upload</button>
-        
+        <button id="uploadBtn">Upload</button> 
       </div>
           <script src = "sidebar.js"></script>
+        </div>
+        
       </section>
 
 </body>
