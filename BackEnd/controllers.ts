@@ -163,40 +163,53 @@ export async function updatePassword(req: Request, res: Response) {
   }
 }
 
- const storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // carpeta de destino
+    cb(null, 'uploads/'); // Destination folder
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9); // Generar unique
-    cb(null, uniqueSuffix + "-" + file.originalname); // Renombrar el archivo
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + '-' + file.originalname);
   },
 });
 
 export async function uploadImage(req: Request, res: Response) {
   const upload = multer({ storage });
 
-  // Utiliza el middleware de multer para manejar la subida de imágenes
-  upload.single("image")(req, res, async (err: any) => {
+  upload.single('image')(req, res, async (err: any) => {
     try {
       if (err) {
-        return res.status(400).json("Error al subir la imagen: " + err.message);
+        return res.status(400).json('Error uploading image: ' + err.message);
       }
-
       if (!req.file) {
-        return res.status(400).json("No se ha subido ninguna imagen.");
+        return res.status(400).json('No image uploaded.');
       }
 
-      // Aquí puedes guardar el nombre de la imagen (req.file.filename) en la base de datos
-      // Realiza la lógica de guardado en la base de datos aquí
+      const filename = req.file.filename;
 
-      return res.status(201).json("Imagen subida correctamente.");
+      // Retrieve user information (if applicable)
+      // For example, if user information is stored in req.user:
+      // const userId = req.user.id;
+
+      const savedImage = await prisma.image.create({
+        data: {
+          image_id: ,
+          image_type: 'jpeg',  // Adjust based on your file type logic
+          user: {
+            connect: {
+              id: id,
+            },
+          },
+        },
+      });
+      return res.status(201).json({ message: 'Image uploaded successfully', image: savedImage });
     } catch (err) {
       console.error(err);
-      return res.status(500).json("Error al subir la imagen.");
+      return res.status(500).json('Error uploading image');
     }
   });
 }
+
 
 export async function getLibery(req: Request, res: Response) {
   const id = parseInt(req.params.id!);
