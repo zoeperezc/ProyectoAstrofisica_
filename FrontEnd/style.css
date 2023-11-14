@@ -83,10 +83,12 @@ body {
     text-decoration: none;
     color: #fff;
     font-family: 'Rubik', sans-serif;
+    cursor: pointer;
 }
 
 .bar a:hover{
     font-weight: bold;
+    
 }
 
 .stars{
