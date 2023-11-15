@@ -3,6 +3,8 @@ import express from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import multer from "multer";
+import { v4 as uuidv4 } from 'uuid';
+//import fetch from "node-fetch";
 //import FastAPI from "fastapi";
 
 const prisma = new PrismaClient();
@@ -53,6 +55,7 @@ export async function createUser(req: Request, res: Response) {
 
     const user = await prisma.user.create({
       data: {
+        id,
         name: "",
         username,
         mail,
@@ -187,21 +190,18 @@ export async function uploadImage(req: Request, res: Response) {
 
       const filename = req.file.filename;
 
-      // Retrieve user information (if applicable)
-      // For example, if user information is stored in req.user:
-      // const userId = req.user.id;
-
       const savedImage = await prisma.image.create({
         data: {
-          image_id: ,
-          image_type: 'jpeg',  // Adjust based on your file type logic
+          image_id: uuidv4(),
+          image_type: 'jpeg/png/jpng/bmp',  
           user: {
             connect: {
-              id: id,
+              id: ,
             },
           },
         },
       });
+      
       return res.status(201).json({ message: 'Image uploaded successfully', image: savedImage });
     } catch (err) {
       console.error(err);
@@ -209,7 +209,6 @@ export async function uploadImage(req: Request, res: Response) {
     }
   });
 }
-
 
 export async function getLibery(req: Request, res: Response) {
   const id = parseInt(req.params.id!);
@@ -245,9 +244,9 @@ export const getApodData = (req: Request, res: Response) => {
     .then((response) => response.json())
     .then((data) => {
       res.status(200).json({
-        apodImage: data.url,
-        apodTitle: data.title,
-        apodExplanation: data.explanation,
+        url: data.url,
+        title: data.title,
+        explanation: data.explanation,
       });
     })
     .catch((error) => {
