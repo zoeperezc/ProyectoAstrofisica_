@@ -182,7 +182,7 @@ body{
   font-size: 12px;
 }
 .sidebar .profile #log_out{
-  position: absolute;
+  position: fixed;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
@@ -209,9 +209,4 @@ body{
   width: calc(100vw - 78px);
   transition: all 0.5s ease;
   z-index: 2;
-}
-
-.sidebar.open ~ .home-section{
-  left: 250px;
-  width: calc(100% - 250px);
 }

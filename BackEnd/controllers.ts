@@ -245,9 +245,9 @@ export const getApodData = (req: Request, res: Response) => {
     .then((response) => response.json())
     .then((data) => {
       res.status(200).json({
-        url: data.url,
-        title: data.title,
-        explanation: data.explanation,
+        apodImage: data.url,
+        apodTitle: data.title,
+        apodExplanation: data.explanation,
       });
     })
     .catch((error) => {

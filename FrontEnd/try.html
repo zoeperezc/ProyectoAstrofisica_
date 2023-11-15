@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="try.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="uploadArea" class="upload-area">
+      
+      <div id="dropZoon" class="upload-area__drop-zoon drop-zoon">
+        <span class="drop-zoon__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="114" height="80" viewBox="0 0 114 80" fill="none">
+            <path d="M91.9125 30.2C90.317 21.6886 85.9636 14.0243 79.5961 8.51623C73.2285 3.00816 65.2418 -0.00196121 57 9.58683e-07C43.2725 9.58683e-07 31.35 8.2 25.4125 20.2C18.4311 20.9942 11.9748 24.476 7.28407 29.9766C2.59336 35.4772 -0.000815584 42.6084 1.92341e-07 50C1.92341e-07 66.55 12.7775 80 28.5 80H90.25C103.36 80 114 68.8 114 55C114 41.8 104.262 31.1 91.9125 30.2ZM90.25 70H28.5C18.0025 70 9.5 61.05 9.5 50C9.5 39.75 16.7675 31.2 26.41 30.15L31.4925 29.6L33.8675 24.85C36.0519 20.3739 39.3674 16.6191 43.4488 13.999C47.5303 11.3789 52.2194 9.99509 57 10C69.445 10 80.18 19.3 82.6025 32.15L84.0275 39.65L91.295 40.2C94.8657 40.4528 98.213 42.12 100.663 44.8659C103.113 47.6119 104.484 51.2329 104.5 55C104.5 63.25 98.0875 70 90.25 70ZM38 45H50.1125V60H63.8875V45H76L57 25L38 45Z" fill="#3A1772"/>
+          </svg>
+        </span>
+        <p class="drop-zoon__paragraph">Drag & Drop</p>
+        <img src="" alt="Preview Image" id="previewImage" class="drop-zoon__preview-image" draggable="false">
+        <input type="file" id="fileInput" class="drop-zoon__file-input" accept="image/*">
+      </div>
+      
+      <div id="fileDetails" class="upload-area__file-details file-details">
+        <div id="uploadedFile" class="uploaded-file">
+          <span class="uploaded-file__icon-text"></span>
+        </div>
+      </div>
+      <div class="upload-area__header">
+        <p class="upload-area__paragraph">
+          File should be an image
+          <strong class="upload-area__tooltip">
+            Like
+            <span class="upload-area__tooltip-data"></span> <!-- Data Will be Comes From Js -->
+          </strong>
+        </p>
+      </div>
+    </div>
+    
+      <script src="upload-image.js"></script>
+</body>
+</html>

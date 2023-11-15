@@ -20,7 +20,7 @@ function menuBtnChange() {
          closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
        }
       }
-      
+
 const goIndice = document.getElementById('goIndice'); //te lleva al indice
 const goHistory = document.getElementById('goHistory'); //te lleva al history.html
 const goImage = document.getElementById('goImage'); //te lleva al upload-image.html
