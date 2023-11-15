@@ -1,37 +1,15 @@
-// Design By
-// - https://dribbble.com/shots/13992184-File-Uploader-Drag-Drop
-
-// Select Upload-Area
 const uploadArea = document.querySelector('#uploadArea')
-
-// Select Drop-Zoon Area
 const dropZoon = document.querySelector('#dropZoon');
-
-// Slect File Input 
 const fileInput = document.querySelector('#fileInput');
-
-// Select Preview Image
 const previewImage = document.querySelector('#previewImage');
-
-// Uploaded File
 const uploadedFile = document.querySelector('#uploadedFile');
-
-// Uploaded File Info
 const uploadedFileInfo = document.querySelector('#uploadedFileInfo');
-
-// Uploaded File  Name
 const uploadedFileName = document.querySelector('.uploaded-file__name');
-
-// Uploaded File Icon
 const uploadedFileIconText = document.querySelector('.uploaded-file__icon-text');
-
-// Uploaded File Counter
 const uploadedFileCounter = document.querySelector('.uploaded-file__counter');
-
-// ToolTip Data
 const toolTipData = document.querySelector('.upload-area__tooltip-data');
+const uploadBtn = document.querySelector('#uploadBtn');
 
-// Images Types
 const imagesTypes = [
   ".jpeg",
   "jpg",
@@ -107,3 +85,7 @@ function fileValidate(fileType, fileSize) {
     return alert('Please make sure to upload An Image File Type');
   };
 };
+
+uploadBtn.addEventListener('click', function (event) {
+  
+});
