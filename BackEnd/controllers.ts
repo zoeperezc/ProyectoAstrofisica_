@@ -55,6 +55,7 @@ export async function createUser(req: Request, res: Response) {
 
     const user = await prisma.user.create({
       data: {
+        id,
         name: "",
         username,
         mail,

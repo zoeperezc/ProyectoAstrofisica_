@@ -10,18 +10,17 @@ datasource db {
 
 model User {
   id       Int      @id @default(autoincrement())
-  name     String
   mail     String   @unique
   password String
   username String?
-  Image    Image[]
 }
 
 model Image {
-  id         Int     @id @default(autoincrement())
-  image_id   Int
+  id         Int      @id @default(autoincrement())
+  image_id   String   @unique
   image_type String
-  user_id    Int
-  user       User    @relation(fields: [user_id], references: [id])
+  url        image[]
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
 }
 
