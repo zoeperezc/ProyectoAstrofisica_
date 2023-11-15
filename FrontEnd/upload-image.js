@@ -10,11 +10,15 @@ const uploadedFileCounter = document.querySelector('.uploaded-file__counter');
 const toolTipData = document.querySelector('.upload-area__tooltip-data');
 const uploadBtn = document.querySelector('#uploadBtn');
 
+const fileDetails = document.querySelector('#fileDetails');
+
+
 const imagesTypes = [
-  ".jpeg",
+  "jpeg",
   "jpg",
   "png",
-  "bmp"
+  "bmp",
+  "gif"
 ];
 
 toolTipData.innerHTML = [...imagesTypes].join(', .');
@@ -50,8 +54,7 @@ function previewFile(file) {
 
   if (fileValidate(fileType, fileSize)) {
     dropZoon.classList.add('drop-zoon--Uploaded');
-
-    // After File Reader Loaded 
+    
     fileReader.addEventListener('load', function () {
       setTimeout(function () {
         previewImage.style.display = 'block';
@@ -87,5 +90,7 @@ function fileValidate(fileType, fileSize) {
 };
 
 uploadBtn.addEventListener('click', function (event) {
-  
+
 });
+
+
