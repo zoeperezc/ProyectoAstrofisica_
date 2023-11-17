@@ -34,11 +34,8 @@ export async function getUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-  const { username, mail, password, passwordConfirm } = req.body;
+  const { username, mail, password_1 } = req.body;
 
-  if (password !== passwordConfirm) {
-    return res.status(400).json("Las contraseñas no coinciden");
-  }
 
   try {
     const emailExists = await prisma.user.findUnique({
@@ -51,7 +48,7 @@ export async function createUser(req: Request, res: Response) {
       return res.status(400).json("Mail already exists in the database");
     }
 
-    const hashed_password = bcrypt.hashSync(password, 10);
+    const hashed_password = bcrypt.hashSync(password_1, 10);
 
     const user = await prisma.user.create({
       data: {
@@ -63,9 +60,6 @@ export async function createUser(req: Request, res: Response) {
       },
     });
 
-     if (password !== passwordConfirm) {
-    return res.status(400).json("Las contraseñas no coinciden");
-  }
 
     return res.status(201).json(user);
   } catch (err) {
