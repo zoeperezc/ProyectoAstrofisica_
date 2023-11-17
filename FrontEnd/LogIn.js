@@ -38,7 +38,6 @@ $(function() {
       .then(data => {
         console.log(data);
         if (data.success) {
-          // Redirige al usuario a la página de inicio si el registro es exitoso
           window.location.href = "http://localhost:3000/indice";
         }
       })
@@ -46,11 +45,7 @@ $(function() {
         console.error(error);
       });
   });
-  
-      })
-      .catch(error => {
-        console.error(error);
-      });
+
 
   logIn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -81,3 +76,5 @@ $(function() {
         console.error(error);
       });
   });
+  
+});
