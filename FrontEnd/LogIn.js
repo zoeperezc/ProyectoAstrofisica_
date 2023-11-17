@@ -45,11 +45,7 @@ $(function() {
         console.error(error);
       });
   });
-  
-      })
-      .catch(error => {
-        console.error(error);
-      });
+
 
   logIn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -80,3 +76,5 @@ $(function() {
         console.error(error);
       });
   });
+  
+});
