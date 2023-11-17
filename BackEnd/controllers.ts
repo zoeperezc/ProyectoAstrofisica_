@@ -55,7 +55,7 @@ export async function createUser(req: Request, res: Response) {
 
     const user = await prisma.user.create({
       data: {
-        id,
+        id: req.params.userId,
         name: "",
         username,
         mail,
@@ -196,7 +196,7 @@ export async function uploadImage(req: Request, res: Response) {
           image_type: 'jpeg/png/jpng/bmp',  
           user: {
             connect: {
-              id: ,
+              id: req.params.userId,
             },
           },
         },
