@@ -38,7 +38,6 @@ $(function() {
       .then(data => {
         console.log(data);
         if (data.success) {
-          // Redirige al usuario a la página de inicio si el registro es exitoso
           window.location.href = "http://localhost:3000/indice";
         }
       })

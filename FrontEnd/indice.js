@@ -28,13 +28,27 @@ goImage.addEventListener('click', () => {
 });
 
 goNews.addEventListener('click', () => {
-  window.location.href = "/NASA-news";
-});
+  fetchData('/NASA-news');
+ });
 
 goApod.addEventListener('click', () => {
-  window.location.href = "/apod";
+  fetchData('/apod-data');
 });
 
-history.addEventListener('click', () => {
-  window.location.href = "//user/:id/history";
+historyBtn.addEventListener('click', () => {
+  const userId = getUserId();
+  fetchData(`/user/${userId}/history`);
 });
+
+function fetchData(url) {
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      // Handle the response as needed
+    })
+    .catch(error => {
+      console.error('Error during fetch:', error);
+    });
+    
+  };
