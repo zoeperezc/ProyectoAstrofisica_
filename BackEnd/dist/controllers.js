@@ -17,6 +17,8 @@ const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const multer_1 = __importDefault(require("multer"));
+const uuid_1 = require("uuid");
+//import fetch from "node-fetch";
 //import FastAPI from "fastapi";
 const prisma = new client_1.PrismaClient();
 exports.prisma = prisma;
@@ -47,10 +49,8 @@ function getUser(req, res) {
 exports.getUser = getUser;
 function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { username, mail, password, passwordConfirm } = req.body;
-        if (password !== passwordConfirm) {
-            return res.status(400).json("Las contraseñas no coinciden");
-        }
+        const { username, mail, password_1 } = req.body;
+        console.log("hola");
         try {
             const emailExists = yield prisma.user.findUnique({
                 where: {
@@ -60,21 +60,20 @@ function createUser(req, res) {
             if (emailExists) {
                 return res.status(400).json("Mail already exists in the database");
             }
-            const hashed_password = bcrypt_1.default.hashSync(password, 10);
+            const hashed_password = bcrypt_1.default.hashSync(password_1, 10);
             const user = yield prisma.user.create({
                 data: {
+                    id: req.params.userId,
                     name: "",
                     username,
                     mail,
                     password: hashed_password,
                 },
             });
-            if (password !== passwordConfirm) {
-                return res.status(400).json("Las contraseñas no coinciden");
-            }
             return res.status(201).json(user);
         }
         catch (err) {
+            console.log(err);
             return res.status(400).json("Error");
         }
     });
@@ -168,32 +167,41 @@ function updatePassword(req, res) {
 exports.updatePassword = updatePassword;
 const storage = multer_1.default.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads/"); // carpeta de destino
+        cb(null, 'uploads/'); // Destination folder
     },
     filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9); // Generar unique
-        cb(null, uniqueSuffix + "-" + file.originalname); // Renombrar el archivo
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        cb(null, uniqueSuffix + '-' + file.originalname);
     },
 });
 function uploadImage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const upload = (0, multer_1.default)({ storage });
-        // Utiliza el middleware de multer para manejar la subida de imágenes
-        upload.single("image")(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
+        upload.single('image')(req, res, (err) => __awaiter(this, void 0, void 0, function* () {
             try {
                 if (err) {
-                    return res.status(400).json("Error al subir la imagen: " + err.message);
+                    return res.status(400).json('Error uploading image: ' + err.message);
                 }
                 if (!req.file) {
-                    return res.status(400).json("No se ha subido ninguna imagen.");
+                    return res.status(400).json('No image uploaded.');
                 }
-                // Aquí puedes guardar el nombre de la imagen (req.file.filename) en la base de datos
-                // Realiza la lógica de guardado en la base de datos aquí
-                return res.status(201).json("Imagen subida correctamente.");
+                const filename = req.file.filename;
+                const savedImage = yield prisma.image.create({
+                    data: {
+                        image_id: (0, uuid_1.v4)(),
+                        image_type: 'jpeg/png/jpng/bmp',
+                        user: {
+                            connect: {
+                                id: req.params.userId,
+                            },
+                        },
+                    },
+                });
+                return res.status(201).json({ message: 'Image uploaded successfully', image: savedImage });
             }
             catch (err) {
                 console.error(err);
-                return res.status(500).json("Error al subir la imagen.");
+                return res.status(500).json('Error uploading image');
             }
         }));
     });

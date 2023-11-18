@@ -3,7 +3,6 @@ import express from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import multer from "multer";
-import { v4 as uuidv4 } from 'uuid';
 //import fetch from "node-fetch";
 //import FastAPI from "fastapi";
 
@@ -34,9 +33,8 @@ export async function getUser(req: Request, res: Response) {
 }
 
 export async function createUser(req: Request, res: Response) {
-  const { username, mail, password_1 } = req.body;
-
-
+  const { username, mail, password_1,id } = req.body;
+ 
   try {
     const emailExists = await prisma.user.findUnique({
       where: {
@@ -52,10 +50,9 @@ export async function createUser(req: Request, res: Response) {
 
     const user = await prisma.user.create({
       data: {
-        id: req.params.userId,
-        name: "",
-        username,
-        mail,
+        id: id,
+        username: '',
+        mail: mail,
         password: hashed_password,
       },
     });
@@ -63,6 +60,7 @@ export async function createUser(req: Request, res: Response) {
 
     return res.status(201).json(user);
   } catch (err) {
+    console.log(err);
     return res.status(400).json("Error");
   }
 }
@@ -186,11 +184,11 @@ export async function uploadImage(req: Request, res: Response) {
 
       const savedImage = await prisma.image.create({
         data: {
-          image_id: uuidv4(),
+          image_id:,
           image_type: 'jpeg/png/jpng/bmp',  
           user: {
             connect: {
-              id: req.params.userId,
+              id: id,
             },
           },
         },

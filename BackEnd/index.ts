@@ -25,5 +25,4 @@ app.listen(PORT, async () => {
   console.log("Server is alive on localhost:" + PORT);
 });
 
-
 export default router;
