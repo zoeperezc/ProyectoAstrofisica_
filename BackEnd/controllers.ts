@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import multer from "multer";
+import { v4 as uuidv4 } from 'uuid';
+import { Request, Response } from 'express';
 //import fetch from "node-fetch";
 //import FastAPI from "fastapi";
 
@@ -45,12 +46,13 @@ export async function createUser(req: Request, res: Response) {
     if (emailExists) {
       return res.status(400).json("Mail already exists in the database");
     }
-
+     
+    const uniqueID = uuidv4();
     const hashed_password = bcrypt.hashSync(password_1, 10);
 
     const user = await prisma.user.create({
       data: {
-        id: id,
+        id: uniqueID,
         username: '',
         mail: mail,
         password: hashed_password,
@@ -168,7 +170,7 @@ const storage = multer.diskStorage({
   },
 });
 
-export async function uploadImage(req: Request, res: Response) {
+export async function uploadImage(req: Request, res: Response ) {
   const upload = multer({ storage });
 
   upload.single('image')(req, res, async (err: any) => {
@@ -181,14 +183,15 @@ export async function uploadImage(req: Request, res: Response) {
       }
 
       const filename = req.file.filename;
+      const userId = parseInt(req.params.id);
 
       const savedImage = await prisma.image.create({
         data: {
-          image_id:,
+          filename: filename,
           image_type: 'jpeg/png/jpng/bmp',  
           user: {
             connect: {
-              id: id,
+              id: userId,
             },
           },
         },
@@ -202,31 +205,28 @@ export async function uploadImage(req: Request, res: Response) {
   });
 }
 
+
 export async function getLibery(req: Request, res: Response) {
-  const id = parseInt(req.params.id!);
-  const user_exist = await prisma.user.findUnique({
-    where: { id },
-  });
-  if (!user_exist) {
-    return res.status(404).json("El usuario no existe");
-  }
+  const userId = parseInt(req.params.id!);
+
   try {
     const user = await prisma.user.findUnique({
-      where: { id },
-      select: {
-        id: true,
-        username: true,
-        Image: true
+      where: { id: userId },
+      include: {
+        Image: true,
       },
-  });
+    });
+
     if (!user) {
-      return res.status(404).json("User not found");
+      return res.status(404).json("El usuario no existe");
     }
-    return res.status(200).json(user);
+
+    return res.status(200).json(user.Image);
   } catch (err: any) {
     return res.status(400).json(err.message);
   }
 }
+
 
 export const getApodData = (req: Request, res: Response) => {
   const apiKey = "UJiVXjcI3Wg7Qdy2WGzUQVQUF37bJPvq7bIt6qJE";

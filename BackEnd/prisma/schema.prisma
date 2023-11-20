@@ -1,34 +1,34 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+  config   = {
+    ssl: {
+      rejectUnauthorized: false,
+      }
+  }
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "mysql"
-  url = env("DATABASE_URL")
-  relationMode = "prisma"
-}
-
+// schema.prisma
 
 model User {
-  id       String  @id @default(auto()) 
-  mail     String  @unique
-  password String
-  username String?
-  Image    Image[]
+  id          String      @id @default(uuid()) @map("_id") @test.IntegrationTest.Int
+  username    String
+  mail        String
+  password    String
+  images      Image[]
 }
 
 model Image {
-  id         Int     @id @default(autoincrement())
-  image_id   String  @unique
-  image_type String
-  url        Url     @relation(fields: [urlId], references: [id])
-  urlId      Int
-  userId     Int
-  user       User    @relation(fields: [userId], references: [id])
+  id          Int         @id @default(autoincrement()) @test.IntegrationTest.Int
+  filename    String
+  image_type  String
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
 }
 
-model Url {
-  id    Int     @id @default(autoincrement())
-  url   String
-  Image Image[]
-}
+// Note: You may need to adjust the data types and relations based on your application requirements.
