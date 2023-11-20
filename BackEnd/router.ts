@@ -33,5 +33,7 @@ router.get('/NASA-news', (req, res) => {
   res.status(200).json({ data: news, lastUpdated});
 });
 
+router.get("/prueba1/ia", controllers.piraterIA);//lolol estoy locooco
+
 
 export default router; 
