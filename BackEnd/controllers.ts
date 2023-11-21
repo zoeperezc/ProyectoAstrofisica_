@@ -63,7 +63,7 @@ export async function createUser(req: Request, res: Response) {
     return res.status(201).json(user);
   } catch (err) {
     console.log(err);
-    return res.status(400).json("Error");
+    return res.status(400).json("Error createUser no del mail");
   }
 }
 
@@ -91,7 +91,7 @@ export async function logInUser(req: Request, res: Response) {
 
     return res.status(200).json({ message: "Login successful", user });
   } catch (err) {
-    return res.status(400).json("Error");
+    return res.status(400).json("Error conexion LogIn");
   }
 }
 export async function updateUser(req: Request, res: Response) {
@@ -123,7 +123,7 @@ export async function updateUser(req: Request, res: Response) {
 
     return res.status(200).json(updatedUser);
   } catch (err) {
-    return res.status(400).json("Error");
+    return res.status(400).json("Error updateUser");
   }
 }
 
@@ -156,7 +156,7 @@ export async function updatePassword(req: Request, res: Response) {
 
     return res.status(200).json("Contraseña actualizada correctamente");
   } catch (err) {
-    return res.status(400).json("Error");
+    return res.status(400).json("Error actualizacion de contreseña");
   }
 }
 

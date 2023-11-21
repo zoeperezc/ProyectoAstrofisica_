@@ -30,5 +30,3 @@ model Image {
   userId      String
   user        User        @relation(fields: [userId], references: [id])
 }
-
-// Note: You may need to adjust the data types and relations based on your application requirements.
