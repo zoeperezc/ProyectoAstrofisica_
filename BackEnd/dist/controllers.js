@@ -22,7 +22,7 @@ const uuid_1 = require("uuid");
 //import FastAPI from "fastapi";
 const prisma = new client_1.PrismaClient();
 exports.prisma = prisma;
-const app = (0, express_1.default)(); // aplicación Express
+const app = (0, express_1.default)();
 exports.app = app;
 function getUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -49,8 +49,7 @@ function getUser(req, res) {
 exports.getUser = getUser;
 function createUser(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { username, mail, password_1 } = req.body;
-        console.log("hola");
+        const { username, mail, password_1, id } = req.body;
         try {
             const emailExists = yield prisma.user.findUnique({
                 where: {
@@ -60,13 +59,13 @@ function createUser(req, res) {
             if (emailExists) {
                 return res.status(400).json("Mail already exists in the database");
             }
+            const uniqueID = (0, uuid_1.v4)();
             const hashed_password = bcrypt_1.default.hashSync(password_1, 10);
             const user = yield prisma.user.create({
                 data: {
-                    id: req.params.userId,
-                    name: "",
-                    username,
-                    mail,
+                    id: uniqueID,
+                    username: '',
+                    mail: mail,
                     password: hashed_password,
                 },
             });
@@ -74,7 +73,7 @@ function createUser(req, res) {
         }
         catch (err) {
             console.log(err);
-            return res.status(400).json("Error");
+            return res.status(400).json("Error createUser no del mail");
         }
     });
 }
@@ -100,7 +99,7 @@ function logInUser(req, res) {
             return res.status(200).json({ message: "Login successful", user });
         }
         catch (err) {
-            return res.status(400).json("Error");
+            return res.status(400).json("Error conexion LogIn");
         }
     });
 }
@@ -131,7 +130,7 @@ function updateUser(req, res) {
             return res.status(200).json(updatedUser);
         }
         catch (err) {
-            return res.status(400).json("Error");
+            return res.status(400).json("Error updateUser");
         }
     });
 }
@@ -160,7 +159,7 @@ function updatePassword(req, res) {
             return res.status(200).json("Contraseña actualizada correctamente");
         }
         catch (err) {
-            return res.status(400).json("Error");
+            return res.status(400).json("Error actualizacion de contreseña");
         }
     });
 }
@@ -186,13 +185,14 @@ function uploadImage(req, res) {
                     return res.status(400).json('No image uploaded.');
                 }
                 const filename = req.file.filename;
+                const userId = parseInt(req.params.id);
                 const savedImage = yield prisma.image.create({
                     data: {
-                        image_id: (0, uuid_1.v4)(),
+                        filename: filename,
                         image_type: 'jpeg/png/jpng/bmp',
                         user: {
                             connect: {
-                                id: req.params.userId,
+                                id: userId,
                             },
                         },
                     },
@@ -209,26 +209,18 @@ function uploadImage(req, res) {
 exports.uploadImage = uploadImage;
 function getLibery(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const id = parseInt(req.params.id);
-        const user_exist = yield prisma.user.findUnique({
-            where: { id },
-        });
-        if (!user_exist) {
-            return res.status(404).json("El usuario no existe");
-        }
+        const userId = parseInt(req.params.id);
         try {
             const user = yield prisma.user.findUnique({
-                where: { id },
-                select: {
-                    id: true,
-                    username: true,
-                    Image: true
+                where: { id: userId },
+                include: {
+                    Image: true,
                 },
             });
             if (!user) {
-                return res.status(404).json("User not found");
+                return res.status(404).json("El usuario no existe");
             }
-            return res.status(200).json(user);
+            return res.status(200).json(user.Image);
         }
         catch (err) {
             return res.status(400).json(err.message);
@@ -239,18 +231,5 @@ exports.getLibery = getLibery;
 const getApodData = (req, res) => {
     const apiKey = "UJiVXjcI3Wg7Qdy2WGzUQVQUF37bJPvq7bIt6qJE";
     const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
-    fetch(apiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-        res.status(200).json({
-            url: data.url,
-            title: data.title,
-            explanation: data.explanation,
-        });
-    })
-        .catch((error) => {
-        console.error("Error fetching data:", error);
-        res.status(500).json({ error: "Failed to fetch APOD data" });
-    });
 };
 exports.getApodData = getApodData;

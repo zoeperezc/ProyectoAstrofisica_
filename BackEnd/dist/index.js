@@ -24,13 +24,13 @@ app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 app.use((0, cookie_parser_1.default)());
 app.use(router_1.default);
-const PORT = 3000;
 exports.news = [];
 exports.lastUpdated = new Date();
 node_cron_1.default.schedule('*/15 * * * * *', () => __awaiter(void 0, void 0, void 0, function* () {
     exports.news = yield (0, cronJobs_1.updateDONKINews)();
     exports.lastUpdated = new Date();
 }));
+const PORT = 3000;
 app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Server is alive on localhost:" + PORT);
 }));

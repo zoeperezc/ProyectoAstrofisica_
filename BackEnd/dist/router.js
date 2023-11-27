@@ -53,4 +53,5 @@ router.get("/user/:id/history", controllers.getLibery);
 router.get('/NASA-news', (req, res) => {
     res.status(200).json({ data: index_1.news, lastUpdated: index_1.lastUpdated });
 });
+//router.get("/prueba1/ia", controllers.piraterIA);//lolol estoy locooco
 exports.default = router;
