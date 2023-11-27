@@ -11,8 +11,6 @@ app.use(cors());
 app.use(cookieParser());
 app.use(router);
 
-const PORT: number = 3000;
-
 export let news = [] as DONKIData;
 export let lastUpdated = new Date();
 
@@ -20,6 +18,8 @@ cron.schedule('*/15 * * * * *', async () => {
   news = await updateDONKINews();
   lastUpdated = new Date();
 });
+
+const PORT: number = 3000;
 
 app.listen(PORT, async () => {
   console.log("Server is alive on localhost:" + PORT);

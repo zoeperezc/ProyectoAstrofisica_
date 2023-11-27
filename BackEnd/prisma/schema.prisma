@@ -7,20 +7,18 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// schema.prisma
-
 model User {
-  id          String      @id @default(uuid()) @map("_id") //@test.IntegrationTest.Int
-  username    String
-  mail        String
-  password    String
-  images      Image[]
+  id       String    @id @default(uuid()) @map("_id")
+  username String
+  mail     String
+  password String
+  images   Image[]
 }
 
 model Image {
-  id          Int         @id @default(autoincrement()) //@test.IntegrationTest.Int
-  filename    String
-  image_type  String
-  userId      String
-  user        User        @relation(fields: [userId], references: [id])
+  id         String   @id @default(auto()) //@test.IntegrationTest.Int
+  filename   String
+  image_type String
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
 }

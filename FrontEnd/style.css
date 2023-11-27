@@ -93,8 +93,8 @@ body {
 
 .stars{
     grid-column: 1;
-    margin-top: 15px;
-    margin-left: 65px;
+    margin-top: 50px;
+    margin-left: 80px;
     animation-name: floating;
     animation-duration: 3s;
     animation-iteration-count: infinite;

@@ -6,6 +6,7 @@
     <link href = "sidebar.css" rel = "stylesheet">
     <link href = "history.css" rel = "stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <title>Search History</title>
 </head>
 <body>
@@ -78,20 +79,56 @@
         </ul>
       </div>
       <section class="home-section">
-        <div class="container">
-            <header>
-                <li class="options">
-                    <ul id="uploading">UPLOADING</ul>
-                    <ul id="history">HISTORY</ul>
-                </li>
-            </header>
-            
+        <div class="cont">
+            <div class="swiper mySwiper container">
+              <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                  <img src="../InteligenciaArtificial/dataset/blackholes/1483686940-black-hole.jpg" alt="">
+                  <div class="swiper-txt">
+                    <h3>blackholes</h3>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="../InteligenciaArtificial/dataset/stars/-nNIUGpBeqxA_130x130_VswjN7jj.png" alt="">
+                  <div class="swiper-txt">
+                    <h3>stars</h3>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="../InteligenciaArtificial/dataset/galaxies/07Z59QFTuXkE_130x130_bQrSbjbW.png" alt="">
+                  <div class="swiper-txt">
+                    <h3>galaxies</h3>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="../InteligenciaArtificial/dataset/nebulas/0302063thumb.jpg" alt="">
+                  <div class="swiper-txt">
+                    <h3>nebulas</h3>
+                  </div>
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="../InteligenciaArtificial/dataset/planets/0301771thumb.jpg" alt="">
+                  <div class="swiper-txt">
+                    <h3>planets</h3>
+                  </div>
+                </div>
+
+              </div>
+            </div>
         </div>
         
-        <script src = "sidebar.js"></script>
-        <script src = "history.js"></script>
         
       </section>
+      
+       
+      <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+      <script src = "sidebar.js"></script>
+      <script src = "history.js"></script>
     
 </body>
 </html>

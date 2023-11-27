@@ -1,0 +1,158 @@
+<html>
+<head>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 600px;
+  margin: 20px auto;
+  position: relative;
+  background: purple;
+}
+
+.title {
+  color: white;
+  font-size: 36px;
+  text-align: center;
+  padding: 10px;
+}
+
+.slider {
+  display: flex;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.slider > div {
+  flex-shrink: 0;
+  width: 33.33%;
+  height: 100%;
+  position: relative;
+}
+
+.slider > div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider > div > span {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 24px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  color: purple;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.arrow:hover {
+  background: #f0f0f0;
+}
+
+.arrow.left {
+  left: 10px;
+}
+
+.arrow.right {
+  right: 10px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: purple;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="title">HISTORIA</div>
+  <div class="slider" id="slider">
+    <div><img src="https://picsum.photos/200/300?random=1" alt="Imagen 1"><span>abru</span></div>
+    <div><img src="https://picsum.photos/200/300?random=2" alt="Imagen 2"><span>zoe</span></div>
+    <div><img src="https://picsum.photos/200/300?random=3" alt="Imagen 3"><span>palo</span></div>
+    <div><img src="https://picsum.photos/200/300?random=4" alt="Imagen 4"><span>luna</span></div>
+    <div><img src="https://picsum.photos/200/300?random=5" alt="Imagen 5"><span>sol</span></div>
+    <div><img src="https://picsum.photos/200/300?random=6" alt="Imagen 6"><span>estrella</span></div>
+  </div>
+  <button class="arrow left" id="prev" onclick="prevSlide()"><</button>
+  <button class="arrow right" id="next" onclick="nextSlide()">></button>
+  <div class="dots" id="dots">
+    <button class="dot active" onclick="goToSlide(0)"></button>
+    <button class="dot" onclick="goToSlide(1)"></button>
+    <button class="dot" onclick="goToSlide(2)"></button>
+  </div>
+</div>
+<script>
+let slider = document.getElementById("slider");
+let dots = document.getElementById("dots").children;
+let slides = slider.children;
+let slideIndex = 0;
+let slideWidth = slides[0].offsetWidth;
+
+function prevSlide() {
+  slideIndex--;
+  if (slideIndex < 0) {
+    slideIndex = slides.length - 1;
+  }
+  updateSlider();
+}
+
+function nextSlide() {
+  slideIndex++;
+  if (slideIndex > slides.length - 1) {
+    slideIndex = 0;
+  }
+  updateSlider();
+}
+
+function goToSlide(n) {
+  slideIndex = n;
+  updateSlider();
+}
+
+function updateSlider() {
+  slider.style.transform = "translateX(" + (-slideWidth * slideIndex) + "px)";
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].classList.remove("active");
+  }
+  dots[slideIndex % 3].classList.add("active");
+}
+</script>
+</body>
+</html>

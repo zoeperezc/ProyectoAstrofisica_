@@ -10,7 +10,7 @@ goImage.addEventListener('click', () => {
     const formData = new FormData();
     formData.append('image', fileInput);
 
-    fetch('http://localhost:3000/upload-image', {
+    fetch('http://localhost:3000/upload-image'+ queries, {
       method: 'POST',
       body: formData
     })
