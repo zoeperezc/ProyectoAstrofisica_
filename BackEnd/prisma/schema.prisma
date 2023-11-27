@@ -7,8 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// schema.prisma
-
 model User {
   id          String      @id @default(uuid()) @map("_id") //@test.IntegrationTest.Int
   username    String
