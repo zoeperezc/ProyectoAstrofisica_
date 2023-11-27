@@ -32,7 +32,20 @@ goNews.addEventListener('click', () => {
  });
 
 goApod.addEventListener('click', () => {
-  fetchData('/apod-data');
+  fetch('/apod-data')
+  .then((response) => response.json())
+  .then((data) => {
+    res.status(200).json({
+      url: data.url,
+      title: data.title,
+      explanation: data.explanation,
+    });
+  })
+  .catch((error) => {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Failed to fetch APOD data" });
+  });
+
 });
 
 historyBtn.addEventListener('click', () => {
